@@ -14,6 +14,6 @@ class Client
 {
     public function __construct()
     {
-        echo 33;exit;
+        echo 11;exit;
     }
 }
