@@ -1,17 +1,15 @@
 <?php
 /**
- * @File: StringTrait.php
+ * @File: String.php
  * @Author: xiongjinhai
  * @Email:562740366@qq.com
- * @Date: 2017/12/12下午2:36
+ * @Date: 2017/12/13下午2:16
  * @Version:Version:1.1 2017 by www.dsweixin.com All Rights Reserver
  */
 
-namespace Redis\Traits;
+namespace Redis\Command;
 
-use Illuminate\Support\Facades\Redis;
-
-trait StringTraits
+class BaseString
 {
     /**
      * 将字符串值value关联到key。
@@ -25,9 +23,8 @@ trait StringTraits
      */
     public function set($key, $value, $expireResolution = null, $expireTTL = null, $flag = null){
 
-        return Redis::set($this->prefix.$key,$value);
+        return $this->connection()->set($this->prefix.$key, $this->serialize($value));
     }
-
     /**
      * 返回key所关联的字符串值。
      * 如果key不存在则返回特殊值nil。
@@ -37,6 +34,8 @@ trait StringTraits
      */
     public function get($key){
 
-        return Redis::get($this->prefix.$key);
+        $value = $this->connection()->get($this->prefix.$key);
+
+        return ! is_null($value) ? $this->unserialize($value): null;
     }
 }

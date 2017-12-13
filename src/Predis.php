@@ -9,19 +9,81 @@
 
 namespace Redis;
 
-use Redis\Traits\StringTrait;
 
-class Predis
+use Illuminate\Contracts\Redis\Factory as Redis;
+
+use Redis\Command\Base;
+
+class Predis extends Base
 {
-    use StringTrait;
+    /**
+     * The Redis factory implementation.
+     *
+     * @var \Illuminate\Contracts\Redis\Factory
+     */
+    protected $redis;
 
+    /**
+     * A string that should be prepended to keys.
+     *
+     * @var string
+     */
     protected $prefix;
 
-    public function __construct($prefix = "")
+    /**
+     * The Redis connection that should be used.
+     *
+     * @var string
+     */
+    protected $connection;
+
+    /**
+     * Create a new Redis store.
+     *
+     * @param  \Illuminate\Contracts\Redis\Factory $redis
+     * @param  string $prefix
+     * @param  string $connection
+     * @return void
+     */
+    public function __construct(Redis $redis, $prefix = '', $connection = 'default')
     {
+        $this->redis = $redis;
 
         $this->setPrefix($prefix);
+
+        $this->setConnection($connection);
     }
+    /**
+     * Get the Redis connection instance.
+     *
+     * @return \Predis\ClientInterface
+     */
+    public function connection()
+    {
+
+        return $this->redis->connection($this->connection);
+    }
+    /**
+     * Set the connection name to be used.
+     *
+     * @param  string  $connection
+     * @return void
+     */
+    public function setConnection($connection)
+    {
+        $this->connection = $connection;
+    }
+
+    /**
+     * Get the Redis database instance.
+     *
+     * @return \Illuminate\Contracts\Redis\Factory
+     */
+    public function getRedis()
+    {
+        return $this->redis;
+    }
+
     /**
      * Get the cache key prefix.
      *
@@ -31,14 +93,16 @@ class Predis
     {
         return $this->prefix;
     }
+
     /**
      * Set the cache key prefix.
      *
-     * @param  string  $prefix
+     * @param  string $prefix
      * @return void
      */
-    public function setPrefix($prefix = ""){
+    public function setPrefix($prefix = '')
+    {
 
-        $this->prefix = empty($prefix) ? config('cache.prefix').":" : $prefix;
+        $this->prefix = !empty($prefix) ? $prefix . ':' :  config('cache.prefix').':';
     }
 }
