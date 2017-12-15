@@ -9,11 +9,12 @@
 
 namespace Redis\Command;
 
+use Redis\Traits\KeyTraits;
 use Redis\Traits\StringTraits;
 
 class Base
 {
-    use StringTraits;
+    use StringTraits,KeyTraits;
     /**
      * Serialize the value.
      *
