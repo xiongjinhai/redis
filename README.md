@@ -8,6 +8,7 @@ composer require dsweixin/redis
     ]
 ```
 
+
 Find the `aliases` key in `config/app.php`.
 
 ```php
@@ -16,6 +17,8 @@ Find the `aliases` key in `config/app.php`.
         'predis' => Redis\Facades\Predis::class,
     ]
 ```
+> laravel 5.5+ 版本不需要手动注册
+
 ```php
  Predis::set($key,$value);
 ```
