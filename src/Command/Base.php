@@ -17,7 +17,6 @@ class Base
     use StringTraits,KeyTraits;
     /**
      * Serialize the value.
-     *
      * @param  mixed  $value
      * @return mixed
      */
@@ -25,10 +24,8 @@ class Base
     {
         return is_numeric($value) ? $value : serialize($value);
     }
-
     /**
      * Unserialize the value.
-     *
      * @param  mixed  $value
      * @return mixed
      */

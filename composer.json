@@ -1,6 +1,6 @@
 {
     "name": "dsweixin/redis",
-    "description": "redis",
+    "description": "redis php",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -14,5 +14,16 @@
     },
     "autoload": {
         "psr-4": {"Redis\\": "src/"}
+    },
+
+    "require-dev": {
+        "laravel/laravel": "^5.5"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Redis\\PredisServiceProvider"
+            ]
+        }
     }
 }
