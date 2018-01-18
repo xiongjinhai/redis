@@ -9,12 +9,13 @@
 
 namespace Redis\Command;
 
+use Redis\Traits\HasheTraits;
 use Redis\Traits\KeyTraits;
 use Redis\Traits\StringTraits;
 
 class Base
 {
-    use StringTraits,KeyTraits;
+    use StringTraits,KeyTraits,HasheTraits;
     /**
      * Serialize the value.
      * @param  mixed  $value
