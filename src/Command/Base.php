@@ -11,11 +11,14 @@ namespace Redis\Command;
 
 use Redis\Traits\HasheTraits;
 use Redis\Traits\KeyTraits;
+use Redis\Traits\ListTraits;
+use Redis\Traits\SetTraits;
+use Redis\Traits\SortedSetTraits;
 use Redis\Traits\StringTraits;
 
 class Base
 {
-    use StringTraits,KeyTraits,HasheTraits;
+    use StringTraits,KeyTraits,HasheTraits,ListTraits,SetTraits,SortedSetTraits;
     /**
      * Serialize the value.
      * @param  mixed  $value
