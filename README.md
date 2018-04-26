@@ -2,6 +2,12 @@
 composer require dsweixin/redis
 
 ```php
+
+larave5.5版本以上可以不用添加下面操作
+
+```
+
+```php
     'providers' => [
         // ...
         Redis\PredisServiceProvider::class,
